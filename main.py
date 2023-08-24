@@ -1,26 +1,27 @@
 import pygame
-from manager import WidgetsManager
-from button import Button
-from slider import Slider
-from bernstein import BernsteinBezierWindow
+from bezier.BezierWindow import BernsteinWindow
+from widgets.WidgetsManager import WidgetsManager
+from widgets.Button import Button
 
-class BezierWindow:
+class MenuWindow:
     def __init__(self, width = 800, height = 600, background_color = (201, 124, 242)):
-        self.isRun = True
+        pygame.init()
+        self.is_run = True
         self.width = width
         self.height = height
         self.background_color = background_color
         self.fps = 0
-        pygame.init()
         self.screen = pygame.display.set_mode((width, height))
         self.widgets_manager = WidgetsManager(self.screen)
-        pygame.display.set_caption("Bezier")
+        pygame.display.set_caption("Bezier Menu")
         self.__create_widgets()
 
     def __create_bezier(self, method):
-        self.isRun = False
+        self.is_run = False
         if method == "Bernstein":
-            BernsteinBezierWindow().run()
+            BernsteinWindow(self.fps).run()
+        pygame.quit()
+        exit()
 
     def __create_widgets(self):
         w = self.width
@@ -37,9 +38,8 @@ class BezierWindow:
 
     def __events(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:     
                 pygame.quit()
-                exit(0)
             self.widgets_manager.handle_event(event, pygame.mouse.get_pos())
         return
     
@@ -51,10 +51,11 @@ class BezierWindow:
         return
 
     def run(self):
-        while self.isRun:
+        while self.is_run:
             self.__events()
             self.__draw()
+        pygame.quit()
 
 if __name__ == "__main__":
-    window = BezierWindow()
+    window = MenuWindow()
     window.run()

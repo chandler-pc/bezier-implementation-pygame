@@ -1,9 +1,8 @@
 import pygame
-from widget import Widget
+from widgets.Widget import Widget
 
 class Button(Widget):
     def __init__(self, widget_manager, position, size, text = "" , color = (200, 200, 200), border_radius = 0):
-        pygame.font.init()   
         super().__init__(widget_manager)
         self.pos = position
         self.size = size

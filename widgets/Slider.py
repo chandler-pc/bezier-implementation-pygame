@@ -1,5 +1,5 @@
 import pygame
-from widget import Widget
+from widgets.Widget import Widget
 
 class Slider(Widget):
     def __init__(self, widget_manager,position,size,min,max,value = 0, color = (200, 200, 200),circle_slide = False, border_radius = 0, dtype = "float"):

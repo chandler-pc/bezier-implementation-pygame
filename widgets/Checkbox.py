@@ -1,4 +1,4 @@
-from widget import Widget
+from widgets.Widget import Widget
 import pygame
 
 class Checkbox(Widget):
